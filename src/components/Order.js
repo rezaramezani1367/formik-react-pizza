@@ -117,14 +117,12 @@ function Order({ formik }) {
                       id={item.label}
                       name="size"
                       onChange={formik.handleChange}
-                      isInvalid={formik.errors.size}
+                      isInvalid={formik.errors.size && formik.touched.size}
                     />
                   </Col>
                 ))}
-                {formik.errors.size && formik.touched.size &&(
-                  
+                {formik.errors.size && formik.touched.size && (
                   <Alert variant="danger"> {formik.errors.size}</Alert>
-
                 )}
               </Row>
               <hr />
@@ -138,14 +136,12 @@ function Order({ formik }) {
                       id={item.label}
                       name="crust"
                       onChange={formik.handleChange}
-                      isInvalid={formik.errors.size}
+                      isInvalid={formik.errors.crust && formik.touched.crust}
                     />
                   </Col>
                 ))}
-                 {formik.errors.crust && formik.touched.crust &&(
-                  
+                {formik.errors.crust && formik.touched.crust && (
                   <Alert variant="danger"> {formik.errors.crust}</Alert>
-
                 )}
               </Row>
             </Form.Group>
@@ -166,7 +162,7 @@ function Order({ formik }) {
                   name="cheese.includes"
                   onChange={formik.handleChange}
                   className="ms-2"
-                />{" "}
+                />
               </Card.Title>
               {formik.values.cheese.includes ? (
                 <Form.Select
@@ -233,7 +229,7 @@ function Order({ formik }) {
         <Card.Body>
           <Card.Title>Non Topping - Meat</Card.Title>
           <Row className="gy-2 mt-3">
-          {nonmeat.map((item, index) => (
+            {nonmeat.map((item, index) => (
               <Col>
                 <Form.Check
                   type="checkbox"
@@ -252,7 +248,13 @@ function Order({ formik }) {
       <Card className="my-3">
         <Card.Body>
           <Card.Title className="mb-3">Special Instruction </Card.Title>
-          <Form.Control as="textarea" name='specialInstruction' value={formik.values.specialInstruction} onChange={formik.handleChange}  style={{ height: "100px" }} />
+          <Form.Control
+            as="textarea"
+            name="specialInstruction"
+            value={formik.values.specialInstruction}
+            onChange={formik.handleChange}
+            style={{ height: "100px" }}
+          />
         </Card.Body>
       </Card>
     </>

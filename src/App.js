@@ -21,11 +21,11 @@ function App() {
       crust: "",
       cheese: {
         includes: false,
-        values: "",
+        values: "Normal",
       },
       sauce: {
         includes: false,
-        values: "",
+        values: "tomato",
       },
       toppingMeat: [],
       toppingNonMeat: [],
@@ -48,7 +48,7 @@ function App() {
       </Nav>
       <Container className="my-4">
         <Card className="shadow-lg p-4">
-          <Form onSubmit={formik.handleSubmit}>
+          <Form onSubmit={formik.handleSubmit} onreset={formik.handleReset}>
             <Row>
               <Col md={8}>
                 <Order formik={formik} />
