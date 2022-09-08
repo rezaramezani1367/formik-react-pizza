@@ -160,6 +160,7 @@ function Order({ formik }) {
                   type="checkbox"
                   id={`cheese`}
                   name="cheese.includes"
+                  value={!formik.values.cheese.includes && (formik.values.cheese.values="" )}
                   onChange={formik.handleChange}
                   className="ms-2"
                 />
@@ -170,12 +171,17 @@ function Order({ formik }) {
                   name="cheese.values"
                   onChange={formik.handleChange}
                 >
+                  <option value="" disabled selected> Select one cheese</option>
                   <option value="Normal">Normal</option>
                   <option value="Light">Light</option>
                   <option value="Extra">Extra</option>
                 </Form.Select>
               ) : (
                 ""
+              )}
+
+              {formik.errors.cheese && formik.touched.cheese &&(
+                <Alert variant="danger" className='mt-3'> {formik.errors.cheese}</Alert>
               )}
             </Col>
             <Col md={6}>
@@ -185,8 +191,9 @@ function Order({ formik }) {
                   type="checkbox"
                   name="sauce.includes"
                   onChange={formik.handleChange}
+                  value={!formik.values.sauce.includes && (formik.values.sauce.values="" )}
                   className="ms-2"
-                />{" "}
+                />
               </Card.Title>
               {formik.values.sauce.includes ? (
                 <Form.Select
@@ -194,11 +201,15 @@ function Order({ formik }) {
                   name="sauce.values"
                   onChange={formik.handleChange}
                 >
+                  <option value="" disabled selected> Select one Sauce</option>
                   <option value="tomato">tomato sauce</option>
                   <option value="france">france sauce</option>
                 </Form.Select>
               ) : (
                 ""
+              )}
+              {formik.errors.sauce && formik.touched.sauce &&(
+                <Alert variant="danger" className='mt-3'> {formik.errors.sauce}</Alert>
               )}
             </Col>
           </Row>

@@ -13,6 +13,12 @@ function App() {
     if(!values.crust){
       errors.crust="Required crust";
     }
+    if(!values.cheese.values && values.cheese.includes){
+      errors.cheese="Required cheese";
+    }
+    if(!values.sauce.values && values.sauce.includes){
+      errors.sauce="Required sauce";
+    }
     return errors;
   };
   const formik = useFormik({
@@ -21,11 +27,11 @@ function App() {
       crust: "",
       cheese: {
         includes: false,
-        values: "Normal",
+        values: "",
       },
       sauce: {
         includes: false,
-        values: "tomato",
+        values: "",
       },
       toppingMeat: [],
       toppingNonMeat: [],
