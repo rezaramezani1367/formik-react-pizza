@@ -103,29 +103,31 @@ function Order({ formik }) {
       <Card>
         <Card.Body>
           <Card.Title>Size & Crust </Card.Title>
-          <Card.Text>
+          <>
             <Form.Group className="my-3">
               <Row className="gy-3">
                 {/* size */}
-
                 {size.map((item, index) => (
                   <Col md={3} key={item.label + index}>
                     <Form.Check
                       type="radio"
+                      id={item.label}
                       label={item.label}
                       value={item.value}
-                      id={item.label}
                       name="size"
                       onChange={formik.handleChange}
                       isInvalid={formik.errors.size && formik.touched.size}
+                      checked={formik.values.size == item.value ? true : false}
                     />
                   </Col>
                 ))}
+
                 {formik.errors.size && formik.touched.size && (
                   <Alert variant="danger"> {formik.errors.size}</Alert>
                 )}
+                <hr />
               </Row>
-              <hr />
+              {/* <hr /> */}
               <Row className="gy-3">
                 {crust.map((item, index) => (
                   <Col md={4} key={item.label + index}>
@@ -137,6 +139,7 @@ function Order({ formik }) {
                       name="crust"
                       onChange={formik.handleChange}
                       isInvalid={formik.errors.crust && formik.touched.crust}
+                      checked={formik.values.crust == item.value ? true : false}
                     />
                   </Col>
                 ))}
@@ -145,7 +148,7 @@ function Order({ formik }) {
                 )}
               </Row>
             </Form.Group>
-          </Card.Text>
+          </>
           {/* <Button variant="primary">Go somewhere</Button> */}
         </Card.Body>
       </Card>
@@ -160,18 +163,27 @@ function Order({ formik }) {
                   type="checkbox"
                   id={`cheese`}
                   name="cheese.includes"
-                  value={!formik.values.cheese.includes && (formik.values.cheese.values="" )}
+                  value={
+                    !formik.values.cheese.includes &&
+                    (formik.values.cheese.values = "")
+                    
+                  }
                   onChange={formik.handleChange}
                   className="ms-2"
+                  checked={formik.values.cheese.includes ? true : false}
                 />
               </Card.Title>
               {formik.values.cheese.includes ? (
                 <Form.Select
-                  aria-label="Default select example"
+                  aria-label="select example"
                   name="cheese.values"
                   onChange={formik.handleChange}
+                  defaultValue={""}
                 >
-                  <option value="" disabled selected> Select one cheese</option>
+                  <option value="" disabled>
+                    {" "}
+                    Select one cheese
+                  </option>
                   <option value="Normal">Normal</option>
                   <option value="Light">Light</option>
                   <option value="Extra">Extra</option>
@@ -180,8 +192,11 @@ function Order({ formik }) {
                 ""
               )}
 
-              {formik.errors.cheese && formik.touched.cheese &&(
-                <Alert variant="danger" className='mt-3'> {formik.errors.cheese}</Alert>
+              {formik.errors.cheese && formik.touched.cheese && (
+                <Alert variant="danger" className="mt-3">
+                  {" "}
+                  {formik.errors.cheese}
+                </Alert>
               )}
             </Col>
             <Col md={6}>
@@ -191,7 +206,11 @@ function Order({ formik }) {
                   type="checkbox"
                   name="sauce.includes"
                   onChange={formik.handleChange}
-                  value={!formik.values.sauce.includes && (formik.values.sauce.values="" )}
+                  value={
+                    !formik.values.sauce.includes &&
+                    (formik.values.sauce.values = "")
+                  }
+                  checked={formik.values.sauce.includes ? true : false}
                   className="ms-2"
                 />
               </Card.Title>
@@ -200,16 +219,24 @@ function Order({ formik }) {
                   aria-label="Default select example"
                   name="sauce.values"
                   onChange={formik.handleChange}
+                  defaultValue={""}
+                  
                 >
-                  <option value="" disabled selected> Select one Sauce</option>
+                  <option value="" disabled>
+                    {" "}
+                    Select one Sauce
+                  </option>
                   <option value="tomato">tomato sauce</option>
                   <option value="france">france sauce</option>
                 </Form.Select>
               ) : (
                 ""
               )}
-              {formik.errors.sauce && formik.touched.sauce &&(
-                <Alert variant="danger" className='mt-3'> {formik.errors.sauce}</Alert>
+              {formik.errors.sauce && formik.touched.sauce && (
+                <Alert variant="danger" className="mt-3">
+                  {" "}
+                  {formik.errors.sauce}
+                </Alert>
               )}
             </Col>
           </Row>
@@ -221,7 +248,7 @@ function Order({ formik }) {
           <Card.Title>Topping - Meat</Card.Title>
           <Row className="gy-2 mt-3">
             {meat.map((item, index) => (
-              <Col>
+              <Col key={index}>
                 <Form.Check
                   type="checkbox"
                   id={item.label}
@@ -229,6 +256,7 @@ function Order({ formik }) {
                   name="toppingMeat"
                   value={item.value}
                   onChange={formik.handleChange}
+                  checked={formik.values.toppingMeat.includes(item.value) ? true : false}
                 ></Form.Check>
               </Col>
             ))}
@@ -241,7 +269,7 @@ function Order({ formik }) {
           <Card.Title>Non Topping - Meat</Card.Title>
           <Row className="gy-2 mt-3">
             {nonmeat.map((item, index) => (
-              <Col>
+              <Col key={index}>
                 <Form.Check
                   type="checkbox"
                   id={item.label}
@@ -249,6 +277,7 @@ function Order({ formik }) {
                   name="toppingNonMeat"
                   value={item.value}
                   onChange={formik.handleChange}
+                  checked={formik.values.toppingNonMeat.includes(item.value) ? true : false}
                 ></Form.Check>
               </Col>
             ))}

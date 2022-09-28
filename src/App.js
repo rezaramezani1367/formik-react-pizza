@@ -41,6 +41,23 @@ function App() {
       alert(JSON.stringify(values,null,2))
     },
     validate,
+    onReset:(values)=>{
+      return {
+        size: "",
+        crust: "",
+        cheese: {
+          includes: false,
+          values: "",
+        },
+        sauce: {
+          includes: false,
+          values: "",
+        },
+        toppingMeat: [],
+        toppingNonMeat: [],
+        specialInstruction: "",
+      }
+    }
   });
 
   return (
@@ -54,7 +71,7 @@ function App() {
       </Nav>
       <Container className="my-4">
         <Card className="shadow-lg p-4">
-          <Form onSubmit={formik.handleSubmit} onreset={formik.handleReset}>
+          <Form onSubmit={formik.handleSubmit} onReset={formik.handleReset}>
             <Row>
               <Col md={8}>
                 <Order formik={formik} />
